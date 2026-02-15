@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { Navbar } from './components/Navbar';
 import { ThemeProvider } from './context/ThemeContext';
+import { Hero } from './components/Hero';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         flexDirection='column'
       >
         <Navbar />
+        <Hero />
       </Box>
     </ThemeProvider>
   );
