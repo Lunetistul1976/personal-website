@@ -1,30 +1,44 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Typography, Link } from '@mui/material';
 import { Location } from '@carbon/icons-react';
 import { socials } from '../utils/socials';
 
-const HERO_DESCRIPTION =
-  "Frontend Engineer specialized in React and TypeScript with experience building scalable design systems and AI-powered features. Strong background in component-driven architecture, GraphQL APIs, and experimentation-driven product development. Passionate about AI-augmented workflows.";
+const WAVE_EMOJI = '👋';
 
-export const Hero: React.FC = () => (
+export const Hero: React.FC = () => {
+  const { t } = useTranslation();
+  const title = t('hero.title');
+  const [before, after] = title.includes(WAVE_EMOJI)
+    ? title.split(WAVE_EMOJI)
+    : [title, ''];
+
+  return (
     <HeroSection>
       <HeroInner>
         <TextBlock>
-          <HeroTitle variant="h3">Hi, I'm Rares 👋</HeroTitle>
+          <HeroTitle variant="h3">
+            {before}
+            {title.includes(WAVE_EMOJI) && (
+              <WaveEmoji aria-hidden="true">{WAVE_EMOJI}</WaveEmoji>
+            )}
+            {after}
+          </HeroTitle>
           <HeroDescription variant="body1" color="text.secondary">
-            {HERO_DESCRIPTION}
+            {t('hero.description')}
           </HeroDescription>
           <MetaSocialWrap>
             <MetaRow>
               <LocationIcon size={20} />
               <Typography variant="body2" color="text.secondary">
-                Bucharest, Romania
+                {t('hero.location')}
               </Typography>
             </MetaRow>
+
             <SocialRow>
             {socials.map(({ key, Icon, href }) => (
-              <Link
+              <StyledLink
                 key={key}
                 href={href}
                 target="_blank"
@@ -34,20 +48,22 @@ export const Hero: React.FC = () => (
                 underline="none"
               >
                 <Icon size={24} />
-              </Link>
+              </StyledLink>
             ))}
             </SocialRow>
           </MetaSocialWrap>
+          
         </TextBlock>
         <ImageBlock>
           <ImageWrapper>
-            <HeroImage src="/hero.png" alt="Rares" />
+            <HeroImage src="/hero.png" alt={t('hero.imageAlt')} />
             <ImageShadow />
           </ImageWrapper>
         </ImageBlock>
       </HeroInner>
     </HeroSection>
-);
+  );
+};
 
 const HeroSection = styled.section`
   flex: 1;
@@ -92,10 +108,40 @@ const TextBlock = styled.div`
 const HeroTitle = styled(Typography)`
   font-weight: 700;
   line-height: 1.2;
-  font-size: 2.25rem;
+  font-size: ${({ theme }) => theme.typography.fontSize.xxxl};
 
-  @media (min-width: 768px) {
-    font-size: 2.5rem;
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: ${({ theme }) => theme.typography.fontSize.display};
+  }
+`;
+
+const WaveEmoji = styled.span`
+  display: inline-block;
+  animation: waveHand 9s ease-in-out 1;
+  transform-origin: 70% 70%;
+
+  @keyframes waveHand {
+    0%, 11%, 33%, 44%, 66%, 77%, 100% {
+      transform: rotate(0deg);
+    }
+    16% {
+      transform: rotate(-25deg);
+    }
+    22% {
+      transform: rotate(20deg);
+    }
+    49% {
+      transform: rotate(-25deg);
+    }
+    55% {
+      transform: rotate(20deg);
+    }
+    82% {
+      transform: rotate(-25deg);
+    }
+    88% {
+      transform: rotate(20deg);
+    }
   }
 `;
 
@@ -123,6 +169,7 @@ const LocationIcon = styled(Location)`
 const SocialRow = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing(2)};
+  
 `;
 
 const ImageBlock = styled.div`
@@ -162,3 +209,10 @@ const ImageShadow = styled.div`
   transform: translate(12px, 12px);
   z-index: 0;
 `;
+
+const StyledLink = styled(Link)`
+  &.MuiLink-root:hover {
+    color: ${({ theme }) => theme.colors.text.primary};
+  }
+`;
+

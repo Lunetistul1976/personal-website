@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "title": "Hi, ich bin Rares 👋",
+    "description": "Frontend-Ingenieur mit Schwerpunkt React und TypeScript, der skalierbare Design-Systeme und KI-gestützte Erlebnisse entwickelt. Leidenschaftlich daran interessiert, echte Probleme zu lösen und Produkte zu bauen, die Menschen wirklich helfen. Immer neugierig, neue Ideen, Technologien und Perspektiven zu erkunden.",
+    "location": "Bukarest, Rumänien",
+    "imageAlt": "Rares"
+  },
+  "nav": {
+    "about": "Über mich",
+    "work": "Arbeit",
+    "contact": "Kontakt",
+    "downloadCv": "CV herunterladen",
+    "toggleTheme": "Theme wechseln",
+    "toggleMenu": "Menü öffnen"
+  }
+}

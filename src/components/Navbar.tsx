@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { Button, IconButton, Divider   } from '@mui/material';
+import { Button, IconButton, Divider, Select, MenuItem } from '@mui/material';
 import { useTheme } from '../context/ThemeContext';
-import {  Menu, Close, AsleepFilled, LightFilled } from '@carbon/icons-react';
+import { supportedLanguages, type LanguageCode } from '../i18n';
+import { Menu, Close, AsleepFilled, LightFilled } from '@carbon/icons-react';
 
 export const Navbar: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const { toggleTheme, theme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const currentLang = supportedLanguages.some((l) => l.code === i18n.language)
+    ? i18n.language
+    : (i18n.language?.slice(0, 2) as LanguageCode) || 'en';
+
+  const handleLanguageChange = (code: LanguageCode) => {
+    i18n.changeLanguage(code);
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -27,27 +38,38 @@ export const Navbar: React.FC = () => {
       <Logo>&lt;RV /&gt;</Logo>
 
       <NavDirectLinks>
-        <Button variant="text" href="#about">About</Button>
-        <Button variant="text" href="#work">Work</Button>
-        <Button variant="text" href="#contact">Contact</Button>
+        <Button variant="text" href="#about">{t('nav.about')}</Button>
+        <Button variant="text" href="#work">{t('nav.work')}</Button>
+        <Button variant="text" href="#contact">{t('nav.contact')}</Button>
+
+        <StyledSelect
+          value={currentLang}
+          onChange={(e) => handleLanguageChange(e.target.value as LanguageCode)}
+          size="small"
+          
+        >
+          {supportedLanguages.map(({ code, label }) => (
+            <MenuItem key={code} value={code}>{label}</MenuItem>
+          ))}
+        </StyledSelect>
 
         <Divider orientation="vertical" flexItem />
 
-        <IconButton onClick={toggleTheme} aria-label="Toggle theme" size="medium">
+        <IconButton onClick={toggleTheme} aria-label={t('nav.toggleTheme')} size="medium">
           {theme.name === 'dark' ? <LightFilled /> : <AsleepFilled />}
         </IconButton>
 
         <Button variant="contained" size="medium" onClick={handleDownloadCV}>
-          Download CV
+          {t('nav.downloadCv')}
         </Button>
       </NavDirectLinks>
 
       <MobileMenuToggle>
-        <IconButton onClick={toggleTheme} aria-label="Toggle theme" size="medium">
+        <IconButton onClick={toggleTheme} aria-label={t('nav.toggleTheme')} size="medium">
           {theme.name === 'dark' ? <LightFilled /> : <AsleepFilled />}
         </IconButton>
 
-        <IconButton onClick={toggleMenu} aria-label="Toggle menu">
+        <IconButton onClick={toggleMenu} aria-label={t('nav.toggleMenu')}>
           {isMenuOpen ? <Close size={24} /> : <Menu size={24} />}
         </IconButton>
       </MobileMenuToggle>
@@ -55,12 +77,23 @@ export const Navbar: React.FC = () => {
 
     <MobileMenuOverlay isOpen={isMenuOpen}>
       <MobileNavLinks>
-        <Button variant="text" href="#about" onClick={closeMenu}>About</Button>
-        <Button variant="text" href="#work" onClick={closeMenu}>Work</Button>
-        <Button variant="text" href="#contact" onClick={closeMenu}>Contact</Button>
+        <Button variant="text" href="#about" onClick={closeMenu}>{t('nav.about')}</Button>
+        <Button variant="text" href="#work" onClick={closeMenu}>{t('nav.work')}</Button>
+        <Button variant="text" href="#contact" onClick={closeMenu}>{t('nav.contact')}</Button>
+
+        <StyledSelect
+          value={currentLang}
+          onChange={(e) => handleLanguageChange(e.target.value as LanguageCode)}
+          size="small"
+          fullWidth
+        >
+          {supportedLanguages.map(({ code, label }) => (
+            <MenuItem key={code} value={code}>{label}</MenuItem>
+          ))}
+        </StyledSelect>
 
         <Button variant="contained" size="medium" onClick={handleDownloadCV}>
-          Download CV
+          {t('nav.downloadCv')}
         </Button>
       </MobileNavLinks>
     </MobileMenuOverlay>
@@ -152,4 +185,8 @@ const MobileNavLinks = styled.div`
     width: 100%;
     max-width: 200px;
   }
+`;
+
+const StyledSelect = styled(Select)`
+  max-width: 120px;
 `;

@@ -21,6 +21,7 @@ const shared = {
             xl: '1.25rem', // 20px
             xxl: '1.5rem', // 24px
             xxxl: '2.25rem', // 36px
+            display: '2.5rem', // 40px – hero/display at desktop
         },
         fontWeight: {
             regular: 400,
@@ -169,6 +170,7 @@ declare module 'styled-components' {
                 xl: string;
                 xxl: string;
                 xxxl: string;
+                display: string;
             };
             fontWeight: {
                 regular: number;
