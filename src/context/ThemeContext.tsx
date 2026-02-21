@@ -50,8 +50,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     };
 
     const mode = theme.name === 'dark' ? 'dark' : 'light';
-
-    // Memoize the MUI theme to prevent unnecessary re-renders
+    
     const muiTheme = useMemo(() => getMuiTheme(mode), [mode]);
 
     return (

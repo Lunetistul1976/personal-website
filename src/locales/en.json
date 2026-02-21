@@ -12,5 +12,13 @@
     "downloadCv": "Download CV",
     "toggleTheme": "Toggle theme",
     "toggleMenu": "Toggle menu"
+  },
+  "about": {
+    "chipLabel": "About me",
+    "heading": "Curious about me? Here you have it:",
+    "paragraph1": "I am a software engineer with a Bachelor's degree in Physics and Informatics from the University of Bucharest and professional certifications in Front-End and Back-End Development from Meta. I specialize in building modern, scalable web applications using React and TypeScript, with hands-on experience in design systems, GraphQL/REST APIs, and AI-powered features.",
+    "paragraph2": "My background in physics shaped a strong analytical mindset and attention to detail, which I apply to writing clean, maintainable, and well-structured code. Over the past few years as a professional developer, I've focused on component-driven architecture, experimentation-driven product development, and AI-augmented workflows that improve both developer experience and product quality.",
+    "paragraph3": "I'm driven by continuous learning, challenging problems, and meaningful collaboration, always aiming to create performant, accessible, and thoughtfully engineered digital products.",
+    "imageAlt": "Vlad Rareș Sabin - Software Engineer"
   }
 }

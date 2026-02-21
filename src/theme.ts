@@ -113,6 +113,10 @@ export const darkTheme: DefaultTheme = {
 export const theme = darkTheme; // Defaulting to dark theme as requested "also set the dark theme"
 
 export const GlobalStyles = createGlobalStyle`
+  #root {
+    height: 100vh;
+  }
+
   body {
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text.primary};
@@ -216,6 +220,9 @@ export const getMuiTheme = (mode: 'light' | 'dark') => {
             secondary: {
                 main: customTheme.colors.secondary,
             },
+            info: {
+                main: customTheme.colors.neon.purple,
+            },
             background: {
                 default: customTheme.colors.background,
                 paper: customTheme.colors.surface,
@@ -256,6 +263,15 @@ export const getMuiTheme = (mode: 'light' | 'dark') => {
                     contained: {
                         fontSize: customTheme.typography.fontSize.base,
                         padding: `${customTheme.spacing(1)} ${customTheme.spacing(3)}`,
+                    },
+                },
+            },
+            MuiChip: {
+                styleOverrides: {
+                    root: {
+                        borderRadius: customTheme.borderRadius.md,
+                        fontFamily: customTheme.typography.fontFamily,
+                        fontWeight: customTheme.typography.fontWeight.medium,
                     },
                 },
             },

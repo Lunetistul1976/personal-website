@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Typography, Link } from '@mui/material';
 import { Location } from '@carbon/icons-react';
 import { socials } from '../utils/socials';
+import { ImageWithShadow } from '../shared/ImageWithShadow';
 
 const WAVE_EMOJI = '👋';
 
@@ -54,24 +55,27 @@ export const Hero: React.FC = () => {
           </MetaSocialWrap>
           
         </TextBlock>
+        
         <ImageBlock>
-          <ImageWrapper>
-            <HeroImage src="/hero.png" alt={t('hero.imageAlt')} />
-            <ImageShadow />
-          </ImageWrapper>
+          <ImageWithShadow imageUrl="/hero.png" alt={t('hero.imageAlt')} />
         </ImageBlock>
       </HeroInner>
     </HeroSection>
   );
 };
 
-const HeroSection = styled.section`
+const HeroSection = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   padding: ${({ theme }) => theme.spacing(6)} ${({ theme }) => theme.spacing(4)};
+  padding-top: ${({theme}) => theme.spacing(8)};
   background-color: ${({ theme }) => theme.colors.background};
   min-height: 0;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding-top: ${({ theme }) => theme.spacing(6)};
+  }
 `;
 
 const HeroInner = styled.div`
@@ -179,35 +183,6 @@ const ImageBlock = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     order: 2;
   }
-`;
-
-const ImageWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 20rem;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    max-width: 22rem;
-  }
-`;
-
-const HeroImage = styled.img`
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  position: relative;
-  z-index: 1;
-  object-fit: cover;
-`;
-
-const ImageShadow = styled.div`
-  position: absolute;
-  inset: 0;
-  background-color: ${({ theme }) => theme.colors.surface};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  transform: translate(12px, 12px);
-  z-index: 0;
 `;
 
 const StyledLink = styled(Link)`
