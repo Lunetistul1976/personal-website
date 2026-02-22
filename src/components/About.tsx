@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { Typography, Chip } from '@mui/material';
+import { Typography } from '@mui/material';
 import { ImageWithShadow } from '../shared/ImageWithShadow';
 
 const ABOUT_IMAGE_URL = '/about.png';
@@ -12,9 +12,7 @@ export const About: React.FC = () => {
   return (
     <Container>
       <Inner>
-        <ChipWrapper>
-          <Chip label={t('about.chipLabel')} variant="filled" size="medium" color="info" />
-        </ChipWrapper>
+        
         <ContentRow>
           <ImageColumn>
             <ImageWithShadow
@@ -42,24 +40,20 @@ export const About: React.FC = () => {
 };
 
 const Container = styled.div`
-  align-items: center;
   display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing(3)};
+  align-items: center;
+  justify-content: center;
   width: 100%;
   padding: ${({ theme }) => theme.spacing(8)} ${({ theme }) => theme.spacing(4)};
   background-color: ${({ theme }) => theme.colors.background};
+  flex: 1;
+  
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     padding: ${({ theme }) => theme.spacing(10)} ${({ theme }) => theme.spacing(6)};
   }
 `;
 
-const ChipWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
 
 const Inner = styled.div`
   max-width: 75rem;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Button, IconButton, Divider, Select, MenuItem } from '@mui/material';
@@ -6,10 +7,18 @@ import { useTheme } from '../context/ThemeContext';
 import { supportedLanguages, type LanguageCode } from '../i18n';
 import { Menu, Close, AsleepFilled, LightFilled } from '@carbon/icons-react';
 
+const navItems = [
+  { to: '/', labelKey: 'nav.home' as const },
+  { to: '/about', labelKey: 'nav.about' as const },
+  { to: '/work', labelKey: 'nav.work' as const },
+  { to: '/contact', labelKey: 'nav.contact' as const },
+] as const;
+
 export const Navbar: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { toggleTheme, theme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const currentLang = supportedLanguages.some((l) => l.code === i18n.language)
     ? i18n.language
@@ -35,12 +44,24 @@ export const Navbar: React.FC = () => {
   return (
   <NavContainer>
     <NavInner>
-      <Logo>&lt;RV /&gt;</Logo>
+      <Logo as={Link} to="/">&lt;RV /&gt;</Logo>
 
       <NavDirectLinks>
-        <Button variant="text" href="#about">{t('nav.about')}</Button>
-        <Button variant="text" href="#work">{t('nav.work')}</Button>
-        <Button variant="text" href="#contact">{t('nav.contact')}</Button>
+        {navItems.map(({ to, labelKey }) => (
+          <Button
+            key={to}
+            variant="text"
+            to={to}
+            component={Link}
+            sx={
+              location.pathname === to
+                ? { color: 'text.primary', fontWeight: 600 }
+                : undefined
+            }
+          >
+            {t(labelKey)}
+          </Button>
+        ))}
 
         <StyledSelect
           value={currentLang}
@@ -75,11 +96,24 @@ export const Navbar: React.FC = () => {
       </MobileMenuToggle>
     </NavInner>
 
-    <MobileMenuOverlay isOpen={isMenuOpen}>
+    <MobileMenuOverlay $isOpen={isMenuOpen}>
       <MobileNavLinks>
-        <Button variant="text" href="#about" onClick={closeMenu}>{t('nav.about')}</Button>
-        <Button variant="text" href="#work" onClick={closeMenu}>{t('nav.work')}</Button>
-        <Button variant="text" href="#contact" onClick={closeMenu}>{t('nav.contact')}</Button>
+        {navItems.map(({ to, labelKey }) => (
+          <Button
+            key={to}
+            variant="text"
+            component={Link}
+            to={to}
+            onClick={closeMenu}
+            sx={
+              location.pathname === to
+                ? { color: 'text.primary', fontWeight: 600 }
+                : undefined
+            }
+          >
+            {t(labelKey)}
+          </Button>
+        ))}
 
         <StyledSelect
           value={currentLang}
@@ -129,7 +163,9 @@ const Logo = styled.h1`
   color: ${({ theme }) => theme.colors.text.primary};
   margin: 0;
   cursor: pointer;
-  z-index: ${({ theme }) => theme.zIndex.appBar}; 
+  z-index: ${({ theme }) => theme.zIndex.appBar};
+  text-decoration: none;
+
 
   span {
     color: ${({ theme }) => theme.colors.neon.cyan};
@@ -157,7 +193,7 @@ const MobileMenuToggle = styled.div`
   }
 `;
 
-const MobileMenuOverlay = styled.div<{ isOpen: boolean }>`
+const MobileMenuOverlay = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -169,8 +205,8 @@ const MobileMenuOverlay = styled.div<{ isOpen: boolean }>`
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  transform: ${({ isOpen }) => (isOpen ? 'translateY(0)' : 'translateY(-100%)')};
-  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
+  transform: ${({ $isOpen }) => ($isOpen ? 'translateY(0)' : 'translateY(-100%)')};
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
 `;
 
 const MobileNavLinks = styled.div`
