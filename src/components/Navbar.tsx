@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Button, IconButton, Divider, Select, MenuItem } from '@mui/material';
@@ -54,19 +54,13 @@ export const Navbar: React.FC = () => {
 
       <NavDirectLinks>
         {navItems.map(({ to, labelKey }) => (
-          <Button
+          <StyledNavLink
             key={to}
-            variant="text"
             to={to}
-            component={Link}
-            sx={
-              location.pathname === to
-                ? { color: 'text.primary', fontWeight: 600 }
-                : undefined
-            }
+            className={location.pathname === to ? 'active' : ''}
           >
             {t(labelKey)}
-          </Button>
+          </StyledNavLink>
         ))}
 
         <StyledSelect
@@ -102,23 +96,17 @@ export const Navbar: React.FC = () => {
       </MobileMenuToggle>
     </NavInner>
 
-    <MobileMenuOverlay $isOpen={isMenuOpen}>
+      <MobileMenuOverlay $isOpen={isMenuOpen}>
       <MobileNavLinks>
         {navItems.map(({ to, labelKey }) => (
-          <Button
+          <StyledNavLink
             key={to}
-            variant="text"
-            component={Link}
             to={to}
+            className={location.pathname === to ? 'active' : ''}
             onClick={closeMenu}
-            sx={
-              location.pathname === to
-                ? { color: 'text.primary', fontWeight: 600 }
-                : undefined
-            }
           >
             {t(labelKey)}
-          </Button>
+          </StyledNavLink>
         ))}
 
         <StyledSelect
@@ -178,6 +166,31 @@ const Logo = styled.h1`
   }
 `;
 
+const StyledNavLink = styled(NavLink)`
+  color: ${({ theme }) => theme.colors.text.secondary};
+  text-decoration: none;
+  font-size: ${({ theme }) => theme.typography.fontSize.base};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
+  padding: ${({ theme }) => theme.spacing(1)} ${({ theme }) => theme.spacing(2)};
+  border-radius: 4px;
+  transition: color 0.2s ease;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+
+  &.active {
+    color: ${({ theme }) => theme.colors.text.primary};
+  }
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.text.primary};
+  }
+
+  &:active,
+  &:focus {
+    background: transparent;
+  }
+`;
+
 const NavDirectLinks = styled.div`
   display: none;
   gap: ${({ theme }) => theme.spacing(2)};
@@ -222,10 +235,11 @@ const MobileNavLinks = styled.div`
   align-items: center;
   width: 100%;
 
-  .MuiButton-root {
+  ${StyledNavLink} {
     font-size: ${({ theme }) => theme.typography.fontSize.xl};
     width: 100%;
     max-width: 200px;
+    text-align: center;
   }
 `;
 
