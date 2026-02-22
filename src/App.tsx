@@ -7,6 +7,7 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Work } from './components/Work';
 import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
 
 function App() {
   return (
@@ -17,12 +18,15 @@ function App() {
         minHeight="100%"
       >
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/work" element={<Work />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+
+          <Routes>
+            <Route path="/" element={<Hero />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+
+        <Footer />
       </Box>
     </ThemeProvider>
   );

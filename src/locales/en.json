@@ -21,5 +21,9 @@
     "paragraph2": "My background in physics shaped a strong analytical mindset and attention to detail, which I apply to writing clean, maintainable, and well-structured code. Over the past few years as a professional developer, I've focused on component-driven architecture, experimentation-driven product development, and AI-augmented workflows that improve both developer experience and product quality.",
     "paragraph3": "I'm driven by continuous learning, challenging problems, and meaningful collaboration, always aiming to create performant, accessible, and thoughtfully engineered digital products.",
     "imageAlt": "Vlad Rareș Sabin - Software Engineer"
+  },
+  "footer": {
+    "rights": "© 2026 Rares Vlad. All rights reserved.",
+    "codedBy": "Coded with ❤️ by Rares Vlad"
   }
 }
