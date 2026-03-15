@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, ReactNode, useMemo, useEffe
 import { ThemeProvider as StyledThemeProvider, DefaultTheme } from 'styled-components';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { lightTheme, darkTheme, GlobalStyles, getMuiTheme } from '../theme';
+import { CursorGlow } from '../components/CursorGlow';
 
 const THEME_STORAGE_KEY = 'app-theme';
 
@@ -58,7 +59,8 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             <StyledThemeProvider theme={theme}>
                 <MuiThemeProvider theme={muiTheme}>
                     <GlobalStyles />
-                    {children}
+                    <CursorGlow />
+                        {children}
                 </MuiThemeProvider>
             </StyledThemeProvider>
         </ThemeContext.Provider>
