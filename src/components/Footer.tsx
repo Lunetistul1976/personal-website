@@ -7,25 +7,34 @@ export const Footer: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <Container>
-      <Typography variant="body2" color="text.secondary">
-        {t('footer.rights')}
-      </Typography>
-      <Typography variant="body2" color="text.secondary">
-        {t('footer.codedBy')}
-      </Typography>
-    </Container>
+    <FooterContainer>
+      <FooterStack>
+        <Body2Secondary variant="body2">{t('footer.rights')}</Body2Secondary>
+        <Body2Secondary variant="body2">{t('footer.codedBy')}</Body2Secondary>
+      </FooterStack>
+    </FooterContainer>
   );
 };
 
-const Container = styled.footer`
+const FooterContainer = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: ${({ theme }) => theme.spacing(1)};
   width: 100%;
   padding: ${({ theme }) => theme.spacing(4)} ${({ theme }) => theme.spacing(2)};
   background-color: ${({ theme }) => theme.colors.surface};
   border-top: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const FooterStack = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(1)};
+`;
+
+const Body2Secondary = styled(Typography)`
+  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
 `;

@@ -11,7 +11,7 @@ const navItems = [
   { to: '/', labelKey: 'nav.home' as const },
   { to: '/about', labelKey: 'nav.about' as const },
   { to: '/work', labelKey: 'nav.work' as const },
-  { to: '/contact', labelKey: 'nav.contact' as const },
+  { to: '/projects', labelKey: 'nav.projects' as const },
 ] as const;
 
 export const Navbar: React.FC = () => {

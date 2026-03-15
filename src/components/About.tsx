@@ -10,9 +10,8 @@ export const About: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <Container>
+    <Section>
       <Inner>
-        
         <ContentRow>
           <ImageColumn>
             <ImageWithShadow
@@ -21,60 +20,51 @@ export const About: React.FC = () => {
             />
           </ImageColumn>
           <TextColumn>
-          
-          <Typography variant="h5">{t('about.heading')}</Typography>
-          <Typography variant="body1" color="text.secondary">
-            {t('about.paragraph1')}
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            {t('about.paragraph2')}
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            {t('about.paragraph3')}
-          </Typography>
-        </TextColumn>
+            <Heading5 variant="h5">{t('about.heading')}</Heading5>
+            <BodySecondary variant="body1">{t('about.paragraph1')}</BodySecondary>
+            <BodySecondary variant="body1">{t('about.paragraph2')}</BodySecondary>
+            <BodySecondary variant="body1">{t('about.paragraph3')}</BodySecondary>
+          </TextColumn>
         </ContentRow>
       </Inner>
-    </Container>
+    </Section>
   );
 };
 
-const Container = styled.div`
+const Section = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  flex: 1;
   padding: ${({ theme }) => theme.spacing(8)} ${({ theme }) => theme.spacing(4)};
   background-color: ${({ theme }) => theme.colors.background};
-  flex: 1;
-  
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     padding: ${({ theme }) => theme.spacing(10)} ${({ theme }) => theme.spacing(6)};
   }
 `;
 
-
 const Inner = styled.div`
   max-width: 75rem;
   margin: 0 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(6)};
   align-items: center;
-  width: 100%;
 `;
 
 const ContentRow = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(6)};
   align-items: center;
-  width: 100%;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    align-items: flex-start;
     flex-direction: row;
+    align-items: flex-start;
     justify-content: space-between;
     gap: ${({ theme }) => theme.spacing(8)};
   }
@@ -82,11 +72,6 @@ const ContentRow = styled.div`
 
 const ImageColumn = styled.div`
   flex-shrink: 0;
-  order: 1;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    order: 1;
-  }
 `;
 
 const TextColumn = styled.div`
@@ -95,12 +80,14 @@ const TextColumn = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(3)};
   text-align: left;
-  order: 2;
   min-width: 0;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    order: 2;
-    max-width: 36rem;
-  }
+  max-width: 36rem;
 `;
 
+const Heading5 = styled(Typography)`
+  color: ${({ theme }) => theme.colors.text.primary};
+`;
+
+const BodySecondary = styled(Typography)`
+  color: ${({ theme }) => theme.colors.text.secondary};
+`;

@@ -1,12 +1,27 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { Typography, Link } from '@mui/material';
+import { Link, Typography } from '@mui/material';
 import { Location } from '@carbon/icons-react';
 import { socials } from '../utils/socials';
 import { ImageWithShadow } from '../shared/ImageWithShadow';
 
 const WAVE_EMOJI = '👋';
+
+const WaveEmoji = styled.span`
+  display: inline-block;
+  animation: waveHand 9s ease-in-out 1;
+  transform-origin: 70% 70%;
+  @keyframes waveHand {
+    0%, 11%, 33%, 44%, 66%, 77%, 100% { transform: rotate(0deg); }
+    16% { transform: rotate(-25deg); }
+    22% { transform: rotate(20deg); }
+    49% { transform: rotate(-25deg); }
+    55% { transform: rotate(20deg); }
+    82% { transform: rotate(-25deg); }
+    88% { transform: rotate(20deg); }
+  }
+`;
 
 export const Hero: React.FC = () => {
   const { t } = useTranslation();
@@ -26,36 +41,34 @@ export const Hero: React.FC = () => {
             )}
             {after}
           </HeroTitle>
-          <HeroDescription variant="body1" color="text.secondary">
+          <HeroDescription variant="body1">
             {t('hero.description')}
           </HeroDescription>
-          <MetaSocialWrap>
+          <MetaSocialStack>
             <MetaRow>
-              <LocationIcon size={20} />
-              <Typography variant="body2" color="text.secondary">
+              <LocationWrap aria-hidden>
+                <Location size={20} />
+              </LocationWrap>
+              <Body2Secondary variant="body2">
                 {t('hero.location')}
-              </Typography>
+              </Body2Secondary>
             </MetaRow>
-
             <SocialRow>
-            {socials.map(({ key, Icon, href }) => (
-              <StyledLink
-                key={key}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={key}
-                color="text.secondary"
-                underline="none"
-              >
-                <Icon size={24} />
-              </StyledLink>
-            ))}
+              {socials.map(({ key, Icon, href }) => (
+                <StyledLink
+                  key={key}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={key}
+                  underline="none"
+                >
+                  <Icon size={24} />
+                </StyledLink>
+              ))}
             </SocialRow>
-          </MetaSocialWrap>
-          
+          </MetaSocialStack>
         </TextBlock>
-        
         <ImageBlock>
           <ImageWithShadow imageUrl="/hero.png" alt={t('hero.imageAlt')} />
         </ImageBlock>
@@ -64,12 +77,12 @@ export const Hero: React.FC = () => {
   );
 };
 
-const HeroSection = styled.div`
+const HeroSection = styled.section`
   flex: 1;
   display: flex;
   align-items: center;
   padding: ${({ theme }) => theme.spacing(6)} ${({ theme }) => theme.spacing(4)};
-  padding-top: ${({theme}) => theme.spacing(8)};
+  padding-top: ${({ theme }) => theme.spacing(8)};
   background-color: ${({ theme }) => theme.colors.background};
   min-height: 0;
 
@@ -110,6 +123,7 @@ const TextBlock = styled.div`
 `;
 
 const HeroTitle = styled(Typography)`
+  color: ${({ theme }) => theme.colors.text.primary};
   font-weight: 700;
   line-height: 1.2;
   font-size: ${({ theme }) => theme.typography.fontSize.xxxl};
@@ -119,41 +133,12 @@ const HeroTitle = styled(Typography)`
   }
 `;
 
-const WaveEmoji = styled.span`
-  display: inline-block;
-  animation: waveHand 9s ease-in-out 1;
-  transform-origin: 70% 70%;
-
-  @keyframes waveHand {
-    0%, 11%, 33%, 44%, 66%, 77%, 100% {
-      transform: rotate(0deg);
-    }
-    16% {
-      transform: rotate(-25deg);
-    }
-    22% {
-      transform: rotate(20deg);
-    }
-    49% {
-      transform: rotate(-25deg);
-    }
-    55% {
-      transform: rotate(20deg);
-    }
-    82% {
-      transform: rotate(-25deg);
-    }
-    88% {
-      transform: rotate(20deg);
-    }
-  }
-`;
-
 const HeroDescription = styled(Typography)`
+  color: ${({ theme }) => theme.colors.text.secondary};
   line-height: 1.6;
 `;
 
-const MetaSocialWrap = styled.div`
+const MetaSocialStack = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(4)};
@@ -165,15 +150,29 @@ const MetaRow = styled.div`
   gap: ${({ theme }) => theme.spacing(1)};
 `;
 
-const LocationIcon = styled(Location)`
+const LocationWrap = styled.div`
   flex-shrink: 0;
   color: ${({ theme }) => theme.colors.text.secondary};
+  display: inline-flex;
 `;
 
 const SocialRow = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing(2)};
-  
+`;
+
+const Body2Secondary = styled(Typography)`
+  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+`;
+
+const StyledLink = styled(Link)`
+  display: inline-flex;
+  color: ${({ theme }) => theme.colors.text.secondary};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.text.primary};
+  }
 `;
 
 const ImageBlock = styled.div`
@@ -184,10 +183,3 @@ const ImageBlock = styled.div`
     order: 2;
   }
 `;
-
-const StyledLink = styled(Link)`
-  &.MuiLink-root:hover {
-    color: ${({ theme }) => theme.colors.text.primary};
-  }
-`;
-

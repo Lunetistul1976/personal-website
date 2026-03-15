@@ -6,7 +6,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Work } from './components/Work';
-import { Contact } from './components/Contact';
+import { Projects } from './components/Projects';
 import { Footer } from './components/Footer';
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
             <Route path="/" element={<Hero />} />
             <Route path="/about" element={<About />} />
             <Route path="/work" element={<Work />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/projects" element={<Projects />} />
           </Routes>
 
         <Footer />
