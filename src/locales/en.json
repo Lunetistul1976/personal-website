@@ -24,24 +24,36 @@
   },
   "work": {
     "experience1": {
-      "url": "https://creatopy.com",
+      "url": "https://thebrief.ai",
       "period": "May 2024 — Present",
       "title": "Full-Stack Engineer",
-      "company": "Creatopy",
-      "description": "Designed and developed AI-powered features by integrating OpenAI APIs, enabling automated design generation from URLs, assets, and templates. Led the implementation of a custom image model feature using the Exactly.AI API. Built and scaled the Creatopy 2.0 Design System using React and TypeScript. Implemented state management (Redux/Context API), integrated REST and GraphQL APIs, and improved frontend performance through optimized React patterns and lazy loading. Collaborated with Product, UX, and engineering teams to deliver AI-powered features for enterprise customers.",
+      "company": "TheBrief",
+      "description": "Designed and developed AI-powered features by integrating OpenAI APIs, enabling automated design generation from URLs, assets, and templates. Led the implementation of a custom image model feature using the Exactly.AI API. Built and scaled the TheBrief 2.0 Design System using React and TypeScript. Implemented state management (Redux/Context API), integrated REST and GraphQL APIs, and improved frontend performance through optimized React patterns and lazy loading. Collaborated with Product, UX, and engineering teams to deliver AI-powered features for enterprise customers.",
       "skills": "TypeScript, JavaScript, React, Node.js, GraphQL, REST API, Redux"
     },
     "experience2": {
-      "url": "https://creatopy.com",
+      "url": "https://thebrief.ai",
       "period": "March 2024 — May 2024",
       "title": "Software Engineer Intern",
-      "company": "Creatopy",
-      "description": "Modernized application settings by integrating the MUI-based Creatopy Design System using React (TypeScript) and styled components. Improved UI consistency, usability, and maintainability through reusable, accessible component patterns. Collaborated with senior engineers to align implementation with industry-standard frontend architecture. Earned a full-time offer based on performance and technical contributions.",
+      "company": "TheBrief",
+      "description": "Modernized application settings by integrating the MUI-based TheBrief Design System using React (TypeScript) and styled components. Improved UI consistency, usability, and maintainability through reusable, accessible component patterns. Collaborated with senior engineers to align implementation with industry-standard frontend architecture. Earned a full-time offer based on performance and technical contributions.",
       "skills": "React, TypeScript, Styled Components, MUI, Design Systems"
     }
   },
   "projects": {
-    "placeholder": "Selected projects and case studies coming soon."
+    "placeholder": "Selected projects and case studies coming soon.",
+    "project1": {
+      "title": "raresvlad.com",
+      "description": "A minimal, dark-themed portfolio website showcasing work experience, about section, and projects. Built with a clean layout, responsive design, and subtle neon accents.",
+      "url": "https://raresvlad.com",
+      "skills": "React, TypeScript, Styled Components, MUI, React Router, i18next"
+    },
+    "project2": {
+      "title": "Physics GPT",
+      "description": "A deep research app that uses OpenAI APIs and Google Docs APIs to enable structured research. Synthesizes complex topics across disciplines, generates downloadable research documents, and supports interactive editing.",
+      "url": "https://physics-gpt-five.vercel.app/",
+      "skills": "OpenAI API, Google Docs API, React, TypeScript, AI, Research"
+    }
   },
   "footer": {
     "rights": "© 2026 Rares Vlad. All rights reserved.",

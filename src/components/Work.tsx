@@ -44,7 +44,7 @@ export const Work: React.FC = () => {
                     <StyledCardContent>
                       <PeriodText variant="body2">{period}</PeriodText>
                       <TitleRow>
-                        <Typography variant="h6" component="span">
+                        <Typography variant="h6" >
                           <Title>
                             {title}
                             <Separator> · </Separator>
@@ -158,8 +158,7 @@ const TitleRow = styled.div`
 `;
 
 const Title = styled.span`
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.neon.cyan};
+  font-weight: 700;  
 
   .separator {
     color: ${({ theme }) => theme.colors.text.secondary};
