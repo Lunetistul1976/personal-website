@@ -1,16 +1,21 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import {
   Card,
   CardActionArea,
   CardContent,
   Chip,
   Typography,
-} from '@mui/material';
-import { Launch } from '@carbon/icons-react';
+} from "@mui/material";
+import { Launch } from "@carbon/icons-react";
 
-const EXPERIENCE_KEYS = ['experience1', 'experience2'] as const;
+const EXPERIENCE_KEYS = ["experience1", "experience2"] as const;
+
+const COMPANY_LOGOS: Record<(typeof EXPERIENCE_KEYS)[number], string> = {
+  experience1: "/thebrief.png",
+  experience2: "/thebrief.png",
+};
 
 export const Work: React.FC = () => {
   const { t } = useTranslation();
@@ -19,7 +24,7 @@ export const Work: React.FC = () => {
     <Section>
       <Inner>
         <HeadingWrap>
-          <Heading2 variant="h5">{t('nav.work')}</Heading2>
+          <Heading2 variant="h5">{t("nav.work")}</Heading2>
         </HeadingWrap>
         <CardList>
           {EXPERIENCE_KEYS.map((key) => {
@@ -29,7 +34,11 @@ export const Work: React.FC = () => {
             const company = t(`work.${key}.company`);
             const description = t(`work.${key}.description`);
             const skillsStr: string = t(`work.${key}.skills`);
-            const skills = skillsStr.split(',').map((s) => s.trim()).filter(Boolean);
+            const skills = skillsStr
+              .split(",")
+              .map((s) => s.trim())
+              .filter(Boolean);
+            const logoSrc = COMPANY_LOGOS[key];
 
             return (
               <StyledCard key={key} variant="outlined">
@@ -42,9 +51,14 @@ export const Work: React.FC = () => {
                     aria-label={`${title} at ${company}`}
                   >
                     <StyledCardContent>
-                      <PeriodText variant="body2">{period}</PeriodText>
+                      <HeaderRow>
+                        <LogoWrap>
+                          <CompanyLogo src={logoSrc} alt={`${company} logo`} />
+                        </LogoWrap>
+                        <PeriodText variant="body2">{period}</PeriodText>
+                      </HeaderRow>
                       <TitleRow>
-                        <Typography variant="h6" >
+                        <Typography variant="h6">
                           <Title>
                             {title}
                             <Separator> · </Separator>
@@ -146,9 +160,37 @@ const StyledCardContent = styled(CardContent)`
   }
 `;
 
+const HeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(3)};
+`;
+
+const LogoWrap = styled.div`
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  overflow: hidden;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.background};
+`;
+
+const CompanyLogo = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  padding: 4px;
+`;
+
 const PeriodText = styled(Typography)`
   color: ${({ theme }) => theme.colors.text.secondary};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  flex: 1;
 `;
 
 const TitleRow = styled.div`
@@ -158,7 +200,7 @@ const TitleRow = styled.div`
 `;
 
 const Title = styled.span`
-  font-weight: 700;  
+  font-weight: 700;
 
   .separator {
     color: ${({ theme }) => theme.colors.text.secondary};
